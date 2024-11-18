@@ -7,7 +7,7 @@ import {
   TinyType,
 } from "node-insim/packets";
 import { createRoot } from "react-node-insim";
-import * as trafficLights from "./trafficLights/trafficLights";
+import * as trafficLights from "@/modules/trafficLights/trafficLights";
 import { App } from "./App";
 import { log } from "./utils/log";
 
