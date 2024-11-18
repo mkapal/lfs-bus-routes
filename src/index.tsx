@@ -9,7 +9,7 @@ import {
 import { createRoot } from "react-node-insim";
 import * as trafficLights from "./trafficLights/trafficLights";
 import { App } from "./App";
-import { log } from "./log";
+import { log } from "./utils/log";
 
 const root = createRoot({
   name: "Driving InSim",
