@@ -20,10 +20,7 @@ export function App() {
             top={40}
             width={30}
             height={8}
-            variant="dark"
-          >
-            test
-          </ConnectionButton>
+          ></ConnectionButton>
         </ButtonsForEachConnection>
       </PlayersProvider>
     </ConnectionsProvider>
@@ -36,34 +33,82 @@ function TurnSignalChecker() {
   useOnPacket(PacketType.ISP_III, (packet, inSim) => {
     const args = packet.Msg.split(" ");
 
-    if (packet.Msg.startsWith("DL_SIGNAL_L")) {
-      const playerId = parseInt(args[1], 10);
-      const player = players.get(playerId);
+    switch (args[0]) {
+      case "DL_SIGNAL_L": {
+        const playerId = parseInt(args[1], 10);
+        const player = players.get(playerId);
 
-      if (!player) {
-        return;
+        if (!player) {
+          return;
+        }
+
+        const text = `${player.PName}^9 - left signal ON`;
+        log(text);
+        inSim.send(
+          new IS_MTC({
+            UCID: 255,
+            Text: text,
+          }),
+        );
+        break;
       }
 
-      inSim.send(
-        new IS_MTC({
-          UCID: 255,
-          Text: `${player.PName}^9 - Left signal ON`,
-        }),
-      );
-    } else if (packet.Msg.startsWith("DL_SIGNAL_OFF")) {
-      const playerId = parseInt(args[1], 10);
-      const player = players.get(playerId);
+      case "DL_SIGNAL_R": {
+        const playerId = parseInt(args[1], 10);
+        const player = players.get(playerId);
 
-      if (!player) {
-        return;
+        if (!player) {
+          return;
+        }
+
+        const text = `${player.PName}^9 - right signal ON`;
+        log(text);
+        inSim.send(
+          new IS_MTC({
+            UCID: 255,
+            Text: text,
+          }),
+        );
+        break;
       }
 
-      inSim.send(
-        new IS_MTC({
-          UCID: 255,
-          Text: `${player.PName}^9 - Left signal OFF`,
-        }),
-      );
+      case "DL_SIGNAL_ALL": {
+        const playerId = parseInt(args[1], 10);
+        const player = players.get(playerId);
+
+        if (!player) {
+          return;
+        }
+
+        const text = `${player.PName}^9 - all signals ON`;
+        log(text);
+        inSim.send(
+          new IS_MTC({
+            UCID: 255,
+            Text: text,
+          }),
+        );
+        break;
+      }
+
+      case "DL_SIGNAL_OFF": {
+        const playerId = parseInt(args[1], 10);
+        const player = players.get(playerId);
+
+        if (!player) {
+          return;
+        }
+
+        const text = `${player.PName}^9 - signals OFF`;
+        log(text);
+        inSim.send(
+          new IS_MTC({
+            UCID: 255,
+            Text: text,
+          }),
+        );
+        break;
+      }
     }
   });
 
