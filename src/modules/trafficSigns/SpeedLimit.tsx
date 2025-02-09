@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from "react-node-insim";
 import { CircleWithBorder } from "./shapes/CircleWithBorder";
-import lfsColor from "../lfsColor";
+import lfsColor from "@/utils/lfsColor";
 
 export function SpeedLimit({
   limit,

@@ -1,7 +1,7 @@
 import { SpeedLimit } from "./SpeedLimit";
 import { Button, useOnPacket } from "react-node-insim";
 import { PacketType } from "node-insim/packets";
-import { log } from "../log";
+import { log } from "@/utils/log";
 import { GiveWay } from "./GiveWay";
 
 export function TrafficSigns() {
