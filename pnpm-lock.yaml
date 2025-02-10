@@ -15,14 +15,14 @@ importers:
         specifier: ^16.4.5
         version: 16.4.5
       node-insim:
-        specifier: ^4.2.1
-        version: 4.2.1
+        specifier: ^4.6.1
+        version: 4.6.1
       react:
         specifier: ^18.3.1
         version: 18.3.1
       react-node-insim:
-        specifier: ^0.0.6
-        version: 0.0.6(node-insim@4.2.1)(react@18.3.1)(supports-color@9.4.0)
+        specifier: 0.0.8
+        version: 0.0.8(node-insim@4.6.1)(react@18.3.1)(supports-color@9.4.0)
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
@@ -464,8 +464,8 @@ packages:
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
-  '@types/lodash@4.17.13':
-    resolution: {integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==}
+  '@types/lodash@4.17.15':
+    resolution: {integrity: sha512-w/P33JFeySuhN6JLkysYUK2gEmy9kHHFN7E8ro0tkfmlDOgxBDzWEZ/J8cWA+fHqFevpswDTFZnDx+R9lbL6xw==}
 
   '@types/ms@0.7.34':
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
@@ -660,8 +660,8 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
-  node-insim@4.2.1:
-    resolution: {integrity: sha512-wKPKPAIrXqMBoRUSd2+7+KMEOhwZnd17Xtc+JkdM1mR45rjpZVgcu25b3ptRwJwBq/Fz+pZKOgxs5d3jhp8VdA==}
+  node-insim@4.6.1:
+    resolution: {integrity: sha512-8SE1vgarTDqX5Xh9+KMhr4upxMxWtbssNqqowCB/vb50gs/48S/n612Ulxr3BQ+VreclPcoEuDpWLPjRmsMjaA==}
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -722,8 +722,8 @@ packages:
   ramda@0.30.1:
     resolution: {integrity: sha512-tEF5I22zJnuclswcZMc8bDIrwRHRzf+NqVEmqg50ShAZMP7MWeR/RGDthfM/p+BlqvF2fXAzpn8i+SJcYD3alw==}
 
-  react-node-insim@0.0.6:
-    resolution: {integrity: sha512-AQZzsGF+m31ZWqm+RiEgDHk+Mgh00Tvw8E+1QPJ315FKcAVmQW8HtvfXTkFyJLKC3AvO5xPg6pJg+hi8lhR2fA==}
+  react-node-insim@0.0.8:
+    resolution: {integrity: sha512-s3SqVPKbtAA+SMHBzFMvNv+r9T10XRn8CaEAh0CSb77z+Nbxf1ndKBRf7RI2sMkremhfTqWinHzCLXOJ/xnS9Q==}
     peerDependencies:
       node-insim: ^0.9.1 || 1 || 2 || 3 || 4
       react: '>=18'
@@ -1127,7 +1127,7 @@ snapshots:
 
   '@types/estree@1.0.6': {}
 
-  '@types/lodash@4.17.13': {}
+  '@types/lodash@4.17.15': {}
 
   '@types/ms@0.7.34': {}
 
@@ -1334,10 +1334,10 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  node-insim@4.2.1:
+  node-insim@4.6.1:
     dependencies:
       '@types/debug': 4.1.12
-      '@types/lodash': 4.17.13
+      '@types/lodash': 4.17.15
       debug: 4.3.7(supports-color@9.4.0)
       lodash: 4.17.21
       parse-lfs-message: 1.2.4
@@ -1377,12 +1377,12 @@ snapshots:
 
   ramda@0.30.1: {}
 
-  react-node-insim@0.0.6(node-insim@4.2.1)(react@18.3.1)(supports-color@9.4.0):
+  react-node-insim@0.0.8(node-insim@4.6.1)(react@18.3.1)(supports-color@9.4.0):
     dependencies:
       '@types/react-reconciler': 0.28.8
       '@welefen/grid-layout': 1.1.0
       debug: 4.3.7(supports-color@9.4.0)
-      node-insim: 4.2.1
+      node-insim: 4.6.1
       ramda: 0.30.1
       react: 18.3.1
       react-reconciler: 0.29.0(react@18.3.1)
