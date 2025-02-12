@@ -1,3 +1,4 @@
+import { type Subscription } from "rxjs";
 import {
   BehaviorSubject,
   concatMap,
@@ -5,7 +6,6 @@ import {
   from,
   of,
   repeat,
-  Subscription,
   timer,
 } from "rxjs";
 

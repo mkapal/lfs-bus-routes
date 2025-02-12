@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "env": {
+    "node": true
+  },
+  "ignorePatterns": ["src/JSX.ts"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "simple-import-sort",
+    "import"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
+      {
+        "fixStyle": "inline-type-imports",
+        "prefer": "type-imports"
+      }
+    ],
+    "import/consistent-type-specifier-style": ["warn", "prefer-inline"],
+    "simple-import-sort/exports": "warn",
+    "simple-import-sort/imports": "warn"
+  }
+}

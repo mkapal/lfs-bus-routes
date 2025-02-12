@@ -1,19 +1,32 @@
-import { ConnectionsProvider, PlayersProvider } from "react-node-insim";
-import { ConnectionButton } from "@/components/ConnectionButton";
-import { ButtonsForEachConnection } from "@/components/ButtonsForEachConnection";
-import { TurnSignalChecker } from "@/modules/turnSignalChecker/TurnSignalChecker";
+import { ConnectionsPlayersProvider } from "react-node-insim";
+
+import { ForEachConnection } from "@/global/ConnectionContext";
+import { DevCommands } from "@/global/DevCommands";
+import { HideAllButtonsInSelectModes } from "@/global/HideAllButtonsInSelectModes";
+import { MultiCarInfoProvider } from "@/global/MultiCarInfoContext";
+import { ForRealPlayers } from "@/global/RealPlayerContext";
+import { BusStateProvider } from "@/modules/busLines/BusStateProvider";
+import { PlayerBusState } from "@/modules/busLines/PlayerBusState";
+import { PlayerCarInfo } from "@/modules/player/PlayerCarInfo";
+import { UserStatus } from "@/modules/userStatus/UserStatus";
 
 export function App() {
   return (
-    <ConnectionsProvider>
-      <PlayersProvider>
-        <TurnSignalChecker />
-        <ButtonsForEachConnection>
-          <ConnectionButton left={40} top={40} width={30} height={8}>
-            Welcome
-          </ConnectionButton>
-        </ButtonsForEachConnection>
-      </PlayersProvider>
-    </ConnectionsProvider>
+    <ConnectionsPlayersProvider>
+      <MultiCarInfoProvider>
+        <DevCommands />
+        <BusStateProvider>
+          <HideAllButtonsInSelectModes>
+            <ForEachConnection>
+              <UserStatus />
+              <ForRealPlayers>
+                <PlayerBusState />
+                <PlayerCarInfo />
+              </ForRealPlayers>
+            </ForEachConnection>
+          </HideAllButtonsInSelectModes>
+        </BusStateProvider>
+      </MultiCarInfoProvider>
+    </ConnectionsPlayersProvider>
   );
 }

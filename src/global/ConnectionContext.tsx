@@ -1,10 +1,9 @@
-import type { ReactNode } from "react";
-import { createContext, useContext } from "react";
-import type { Connection } from "react-node-insim";
+import { createContext, type ReactNode, useContext } from "react";
+import { type Connection, useConnections } from "react-node-insim";
 
-import { log as baseLog } from "@/utils/log";
+import { log as baseLog } from "@/shared/log";
 
-export type ConnectionContextType = {
+type ConnectionContextType = {
   connection: Connection;
   log: (...args: unknown[]) => void;
 };
@@ -39,4 +38,18 @@ export function useConnectionContext() {
   }
 
   return connectionContext;
+}
+
+export type ButtonsByConnectionProps = {
+  children: ReactNode;
+};
+
+export function ForEachConnection({ children }: ButtonsByConnectionProps) {
+  const connections = useConnections();
+
+  return connections.map((connection) => (
+    <ConnectionContextProvider key={connection.UCID} connection={connection}>
+      {children}
+    </ConnectionContextProvider>
+  ));
 }

@@ -1,5 +1,7 @@
-import lfsColor from "@/utils/lfsColor";
-import { Button, ButtonProps } from "react-node-insim";
+import { type ButtonProps } from "react-node-insim";
+import { Button } from "react-node-insim";
+
+import lfsColor from "@/shared/lfsColor";
 
 type CircleProps = Omit<ButtonProps, "width" | "height" | "align">;
 

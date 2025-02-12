@@ -1,8 +1,10 @@
-import { SpeedLimit } from "./SpeedLimit";
-import { Button, useOnPacket } from "react-node-insim";
 import { PacketType } from "node-insim/packets";
-import { log } from "@/utils/log";
+import { Button, useOnPacket } from "react-node-insim";
+
+import { log } from "@/shared/log";
+
 import { GiveWay } from "./GiveWay";
+import { SpeedLimit } from "./SpeedLimit";
 
 export function TrafficSigns() {
   useOnPacket(PacketType.ISP_MSO, (packet) => {

@@ -1,6 +1,7 @@
-import { useOnPacket, usePlayers } from "react-node-insim";
 import { IS_MTC, PacketType } from "node-insim/packets";
-import { log } from "@/utils/log";
+import { useOnPacket, usePlayers } from "react-node-insim";
+
+import { log } from "@/shared/log";
 
 export function TurnSignalChecker() {
   const players = usePlayers();

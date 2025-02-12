@@ -1,11 +1,12 @@
-import { IntersectionController } from "./IntersectionController";
+import { type InSim } from "node-insim";
 import {
   IS_OCO,
   ObjectIndex,
   OCOAction,
   OCOAutocrossStartLights,
 } from "node-insim/packets";
-import { InSim } from "node-insim";
+
+import { IntersectionController } from "./IntersectionController";
 
 export function initialize(inSim: InSim) {
   const lights = [1, 2];

@@ -1,5 +1,7 @@
-import { Button, ButtonProps } from "react-node-insim";
-import lfsColor from "@/utils/lfsColor";
+import { type ButtonProps } from "react-node-insim";
+import { Button } from "react-node-insim";
+
+import lfsColor from "@/shared/lfsColor";
 
 export function GiveWay({
   left = 0,
