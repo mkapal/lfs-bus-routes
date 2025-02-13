@@ -1,12 +1,3 @@
-export const lines = [
-  {
-    id: "2",
-  },
-  {
-    id: "3",
-  },
-];
-
 type BusStop = {
   name: string;
   x: number;
@@ -17,10 +8,17 @@ type BusStop = {
 
 export const busStops: BusStop[] = [
   {
-    name: "Central",
+    name: "Central 1",
     x: -11031097,
     y: 15502140,
     z: 351847,
-    heading: 32764,
+    heading: 32768,
+  },
+  {
+    name: "Central 2",
+    x: -10978678,
+    y: 12542524,
+    z: 471164,
+    heading: 32768,
   },
 ];

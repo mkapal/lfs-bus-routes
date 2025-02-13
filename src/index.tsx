@@ -7,6 +7,7 @@ import { createRoot } from "react-node-insim";
 import { log } from "@/shared/log";
 
 import { App } from "./App";
+import * as trafficLights from "./modules/trafficLights/trafficLights";
 
 const { render, inSim } = createRoot({
   name: "Driving InSim",
@@ -28,6 +29,8 @@ inSim.on("disconnect", () => log("InSim disconnected"));
 
 inSim.on(PacketType.ISP_VER, (packet) => {
   log(`Connected to LFS ${packet.Product} ${packet.Version}`);
+
+  trafficLights.initialize(inSim);
 
   // inSim.send(
   //   new IS_MTC({
