@@ -1,31 +1,21 @@
 import { ConnectionsPlayersProvider } from "react-node-insim";
 
-import { ForEachConnection } from "@/global/ConnectionContext";
-import { DevCommands } from "@/global/DevCommands";
-import { MultiCarInfoProvider } from "@/global/MultiCarInfoContext";
-import { ForRealPlayers } from "@/global/RealPlayerContext";
-import { BusStopChecker } from "@/modules/busLines/BusStopChecker";
-import { BusStopStateProvider } from "@/modules/busLines/BusStopStateProvider";
-import { PlayerBusState } from "@/modules/busLines/PlayerBusState";
-import { PlayerCarInfo } from "@/modules/player/PlayerCarInfo";
-import { UserStatus } from "@/modules/userStatus/UserStatus";
+import { ConnectionScopeModules } from "@/modules/ConnectionScopeModules";
+import { GlobalModules } from "@/modules/GlobalModules";
+import { PlayerScopeModules } from "@/modules/PlayerScopeModules";
+import { ConnectionScopeProvider } from "@/scopes/connectionScope";
+import { PlayerScopeProvider } from "@/scopes/playerScope";
 
 export function App() {
   return (
     <ConnectionsPlayersProvider>
-      <MultiCarInfoProvider>
-        <DevCommands />
-        <ForEachConnection>
-          <UserStatus />
-          <ForRealPlayers>
-            <BusStopStateProvider>
-              <BusStopChecker />
-              <PlayerBusState />
-              <PlayerCarInfo />
-            </BusStopStateProvider>
-          </ForRealPlayers>
-        </ForEachConnection>
-      </MultiCarInfoProvider>
+      <GlobalModules />
+      <ConnectionScopeProvider>
+        <ConnectionScopeModules />
+        <PlayerScopeProvider>
+          <PlayerScopeModules />
+        </PlayerScopeProvider>
+      </ConnectionScopeProvider>
     </ConnectionsPlayersProvider>
   );
 }

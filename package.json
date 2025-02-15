@@ -13,8 +13,10 @@
     "lint:fix": "eslint \"./src/**/*\" --ext .js,.ts --fix"
   },
   "dependencies": {
+    "bunshi": "^2.1.5",
     "debug": "^4.3.7",
     "dotenv": "^16.4.5",
+    "jotai": "^2.12.0",
     "node-insim": "^4.6.1",
     "react": "^18.3.1",
     "react-node-insim": "0.0.8",

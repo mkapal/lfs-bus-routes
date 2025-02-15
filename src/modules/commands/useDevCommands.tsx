@@ -3,7 +3,7 @@ import { useOnPacket } from "react-node-insim";
 
 import { useMultiCarInfoRef } from "@/shared/useMultiCarInfoRef";
 
-export function DevCommands() {
+export function useDevCommands() {
   const multiCarInfoRef = useMultiCarInfoRef();
 
   useOnPacket(PacketType.ISP_III, (packet) => {
@@ -27,6 +27,4 @@ export function DevCommands() {
       }
     }
   });
-
-  return null;
 }

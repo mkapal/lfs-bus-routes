@@ -1,37 +1,28 @@
 import { PacketType } from "node-insim/packets";
-import { createContext, type ReactNode, useContext, useState } from "react";
 import { useOnPacket } from "react-node-insim";
 
-import { useRealPlayerContext } from "@/global/RealPlayerContext";
 import { busStops } from "@/modules/busLines/busStops";
+import { usePlayerScope } from "@/scopes/playerScope";
 import { isWithinRadius } from "@/shared/coordinates";
 import {
   convertDegreesToLfsAngle,
   convertMetersToLfsCarPositionUnits,
 } from "@/shared/lfsUnits";
 
+import { useBusStop } from "./useBusStop";
+
 const STOP_SPEED_THRESHOLD = 33; // ~0.1 m/s
 const HEADING_THRESHOLD = convertDegreesToLfsAngle(5);
 const XY_POSITION_THRESHOLD = convertMetersToLfsCarPositionUnits(2.5);
 const Z_POSITION_THRESHOLD = convertMetersToLfsCarPositionUnits(0.5);
 
-type BusStopStateContextType = {
-  isStoppedAtBusStop: boolean;
-};
-
-const BusStopStateContext = createContext<BusStopStateContextType | null>(null);
-
-type BusStopStateProviderProps = {
-  children: ReactNode;
-};
-
-export function BusStopStateProvider({ children }: BusStopStateProviderProps) {
-  const { realPlayer } = useRealPlayerContext();
-  const [isStoppedAtBusStop, setIsStoppedAtBusStop] = useState(false);
+export function useBusStopDetector() {
+  const player = usePlayerScope();
+  const setBusStop = useBusStop.set();
 
   useOnPacket(PacketType.ISP_MCI, (packet) => {
     packet.Info.forEach((info) => {
-      if (info.PLID !== realPlayer.PLID) {
+      if (info.PLID !== player.PLID) {
         return;
       }
 
@@ -61,37 +52,9 @@ export function BusStopStateProvider({ children }: BusStopStateProviderProps) {
       const isGoodAngle =
         headingDelta === null ? false : headingDelta <= HEADING_THRESHOLD;
 
-      if (!isStoppedAtBusStop && isStopSpeed && isGoodAngle && foundBusStop) {
-        setIsStoppedAtBusStop(true);
-        return;
-      }
-
-      if (
-        (isStoppedAtBusStop &&
-          (!isStopSpeed || !foundBusStop || !isGoodAngle)) ||
-        !isStoppedAtBusStop
-      ) {
-        setIsStoppedAtBusStop(false);
-        return;
-      }
+      setBusStop(
+        isStopSpeed && isGoodAngle && foundBusStop ? foundBusStop.id : null,
+      );
     });
   });
-
-  return (
-    <BusStopStateContext.Provider value={{ isStoppedAtBusStop }}>
-      {children}
-    </BusStopStateContext.Provider>
-  );
-}
-
-export function useBusStopState() {
-  const context = useContext(BusStopStateContext);
-
-  if (context === null) {
-    throw new Error(
-      "useBusState hook must be called within <BusStateProvider>",
-    );
-  }
-
-  return context;
 }
