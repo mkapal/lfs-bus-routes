@@ -1,10 +1,16 @@
-import { PlayerButtons } from "@/buttons/PlayerButtons";
-import { useBusStopDetector } from "@/modules/busStop/useBusStopDetector";
-import { useBusStopProgressMonitor } from "@/modules/busStop/useBusStopProgressMonitor";
+import { BusStopBoardingProgress } from "@/buttons/player/BusStopBoardingProgress";
+import { CurrentBusStop } from "@/buttons/player/CurrentBusStop";
+import { PlayerCarInfo } from "@/buttons/player/PlayerCarInfo";
+import { BusStopModule } from "@/modules/busStops/BusStopModule";
 
 export function PlayerScopeModules() {
-  useBusStopDetector();
-  useBusStopProgressMonitor();
-
-  return <PlayerButtons />;
+  return (
+    <>
+      <BusStopModule>
+        <CurrentBusStop />
+        <BusStopBoardingProgress />
+      </BusStopModule>
+      <PlayerCarInfo />
+    </>
+  );
 }

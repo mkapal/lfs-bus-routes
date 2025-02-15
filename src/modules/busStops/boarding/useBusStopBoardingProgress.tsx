@@ -1,14 +1,16 @@
+import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect } from "react";
 
-import { useBusStop } from "@/modules/busStop/useBusStop";
-import { useBusStopProgress } from "@/modules/busStop/useBusStopProgress";
+import { busStopBoardingProgressAtom } from "@/modules/busStops/boarding/busStopBoardingProgressAtom";
+import { currentBusStopAtom } from "@/modules/busStops/stopDetection/currentBusStopAtom";
 
-export function useBusStopProgressMonitor() {
-  const busStop = useBusStop.get();
-  const setBusStopProgress = useBusStopProgress.set();
+export function useBusStopBoardingProgress() {
+  const busStop = useAtomValue(currentBusStopAtom);
+  const setBusStopProgress = useSetAtom(busStopBoardingProgressAtom);
 
   useEffect(() => {
     if (!busStop) {
+      setBusStopProgress(null);
       return;
     }
 

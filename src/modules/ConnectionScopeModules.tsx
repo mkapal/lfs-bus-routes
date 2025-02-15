@@ -1,5 +1,9 @@
-import { ConnectionButtons } from "@/buttons/ConnectionButtons";
+import { UserName } from "@/buttons/connection/UserName";
 
 export function ConnectionScopeModules() {
-  return <ConnectionButtons />;
+  return (
+    <>
+      <UserName />
+    </>
+  );
 }

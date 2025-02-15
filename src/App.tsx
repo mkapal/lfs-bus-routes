@@ -1,10 +1,12 @@
-import { ConnectionsPlayersProvider } from "react-node-insim";
+import {
+  ConnectionScopeProvider,
+  ConnectionsPlayersProvider,
+  HumanPlayerScopeProvider,
+} from "react-node-insim";
 
 import { ConnectionScopeModules } from "@/modules/ConnectionScopeModules";
 import { GlobalModules } from "@/modules/GlobalModules";
 import { PlayerScopeModules } from "@/modules/PlayerScopeModules";
-import { ConnectionScopeProvider } from "@/scopes/connectionScope";
-import { PlayerScopeProvider } from "@/scopes/playerScope";
 
 export function App() {
   return (
@@ -12,9 +14,9 @@ export function App() {
       <GlobalModules />
       <ConnectionScopeProvider>
         <ConnectionScopeModules />
-        <PlayerScopeProvider>
+        <HumanPlayerScopeProvider>
           <PlayerScopeModules />
-        </PlayerScopeProvider>
+        </HumanPlayerScopeProvider>
       </ConnectionScopeProvider>
     </ConnectionsPlayersProvider>
   );

@@ -1,24 +1,24 @@
+import { useSetAtom } from "jotai";
 import { PacketType } from "node-insim/packets";
-import { useOnPacket } from "react-node-insim";
+import { useHumanPlayerScope, useOnPacket } from "react-node-insim";
 
-import { busStops } from "@/modules/busLines/busStops";
-import { usePlayerScope } from "@/scopes/playerScope";
+import { busStops } from "@/modules/busStops/busStops";
 import { isWithinRadius } from "@/shared/coordinates";
 import {
   convertDegreesToLfsAngle,
   convertMetersToLfsCarPositionUnits,
 } from "@/shared/lfsUnits";
 
-import { useBusStop } from "./useBusStop";
+import { currentBusStopAtom } from "./currentBusStopAtom";
 
 const STOP_SPEED_THRESHOLD = 33; // ~0.1 m/s
 const HEADING_THRESHOLD = convertDegreesToLfsAngle(5);
 const XY_POSITION_THRESHOLD = convertMetersToLfsCarPositionUnits(2.5);
 const Z_POSITION_THRESHOLD = convertMetersToLfsCarPositionUnits(0.5);
 
-export function useBusStopDetector() {
-  const player = usePlayerScope();
-  const setBusStop = useBusStop.set();
+export function useCurrentBusStopDetector() {
+  const player = useHumanPlayerScope();
+  const setCurrentBusStop = useSetAtom(currentBusStopAtom);
 
   useOnPacket(PacketType.ISP_MCI, (packet) => {
     packet.Info.forEach((info) => {
@@ -52,7 +52,7 @@ export function useBusStopDetector() {
       const isGoodAngle =
         headingDelta === null ? false : headingDelta <= HEADING_THRESHOLD;
 
-      setBusStop(
+      setCurrentBusStop(
         isStopSpeed && isGoodAngle && foundBusStop ? foundBusStop.id : null,
       );
     });

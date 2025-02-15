@@ -1,6 +1,6 @@
 import "./env";
 
-import { InSimFlags, IS_PLH, PacketType, PlayerHCap } from "node-insim/packets";
+import { InSimFlags, PacketType } from "node-insim/packets";
 import { StrictMode } from "react";
 import { createRoot } from "react-node-insim";
 

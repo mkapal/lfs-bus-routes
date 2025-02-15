@@ -17,9 +17,10 @@
     "debug": "^4.3.7",
     "dotenv": "^16.4.5",
     "jotai": "^2.12.0",
+    "jotai-scope": "^0.7.3",
     "node-insim": "^4.6.1",
     "react": "^18.3.1",
-    "react-node-insim": "0.0.8",
+    "react-node-insim": "0.0.11",
     "rxjs": "^7.8.1",
     "supports-color": "^9.4.0"
   },
@@ -43,5 +44,5 @@
     "**/*.js",
     "**/*.d.ts"
   ],
-  "packageManager": "pnpm@9.3.0+sha256.e1f9e8d1a16607a46dd3c158b5f7a7dc7945501d1c6222d454d63d033d1d918f"
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

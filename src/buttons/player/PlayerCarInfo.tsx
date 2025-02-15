@@ -1,12 +1,15 @@
-import { Button, VStack } from "react-node-insim";
+import {
+  Button,
+  useConnectionScope,
+  useHumanPlayerScope,
+  VStack,
+} from "react-node-insim";
 
-import { useConnectionScope } from "@/scopes/connectionScope";
-import { usePlayerScope } from "@/scopes/playerScope";
 import { useMultiCarInfo } from "@/shared/useMultiCarInfo";
 
 export function PlayerCarInfo() {
   const { UCID } = useConnectionScope();
-  const player = usePlayerScope();
+  const player = useHumanPlayerScope();
   const multiCarInfo = useMultiCarInfo();
 
   const info = multiCarInfo[player.PLID];

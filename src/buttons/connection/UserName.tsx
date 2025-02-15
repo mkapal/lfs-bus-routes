@@ -1,6 +1,4 @@
-import { Button } from "react-node-insim";
-
-import { useConnectionScope } from "@/scopes/connectionScope";
+import { Button, useConnectionScope } from "react-node-insim";
 
 export function UserName() {
   const { UCID, UName } = useConnectionScope();
