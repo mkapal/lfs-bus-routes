@@ -2222,10 +2222,10 @@ ramda@^0.30.1:
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.30.1.tgz#7108ac95673062b060025052cd5143ae8fc605bf"
   integrity sha512-tEF5I22zJnuclswcZMc8bDIrwRHRzf+NqVEmqg50ShAZMP7MWeR/RGDthfM/p+BlqvF2fXAzpn8i+SJcYD3alw==
 
-react-node-insim@0.0.11:
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/react-node-insim/-/react-node-insim-0.0.11.tgz#f7dd770fdfee84090299c0dd3003cd2fdc06aba3"
-  integrity sha512-dFdcmZtzaz0Vos9lguHuK51hN4zGmoVIB6/cigXvWU28a9ewchXsbZe7JBRF2xBeHYUq91nMSZY6ZYjfFGyMFQ==
+react-node-insim@0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/react-node-insim/-/react-node-insim-0.0.12.tgz#64e67965f9d05b01be672f33dde307844311ab33"
+  integrity sha512-BeP5CaaQAtYrs0EmnnkSiglI0uwHbaANBvSTtH7pUwLdO9mQhscX80syASpZA2DKn7VLlddi0qhVNKyZneUldg==
   dependencies:
     "@types/react-reconciler" "^0.28.2"
     "@welefen/grid-layout" "^1.1.0"

@@ -12,7 +12,7 @@ export function CurrentBusStop() {
   }
 
   return (
-    <Button variant="dark" top={0} left={100} width={30} height={5}>
+    <Button variant="dark" top={0} left={120} width={30} height={5}>
       {busStops.find(({ id }) => id === currentBusStop)?.name}
     </Button>
   );

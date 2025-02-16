@@ -1,9 +1,9 @@
-import { UserName } from "@/buttons/connection/UserName";
+import { TopBar } from "@/buttons/connection/TopBar";
 
 export function ConnectionScopeModules() {
   return (
     <>
-      <UserName />
+      <TopBar />
     </>
   );
 }

@@ -11,7 +11,7 @@ export function BusStopBoardingProgress() {
   }
 
   return (
-    <Button top={5} left={100} width={30} height={5} variant="dark">
+    <Button top={5} left={120} width={30} height={5} variant="dark">
       Boarding: {progress}
     </Button>
   );
