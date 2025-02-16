@@ -1,9 +1,11 @@
 import { atom } from "jotai";
 
-import { type BusStop } from "@/modules/busStops/busStops";
+import { type BusLine } from "@/modules/busStops/database/busLines";
+import { type BusStop } from "@/modules/busStops/database/busStops";
 
 export type Passenger = {
   id: number;
+  line: BusLine;
   destination: BusStop;
 };
 

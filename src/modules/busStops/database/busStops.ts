@@ -30,10 +30,10 @@ export const busStops: BusStop[] = [
   {
     id: 3,
     name: "Newbury South",
-    x: -10278678,
-    y: 12342524,
-    z: 431164,
-    heading: 30768,
+    x: -10872567,
+    y: 8169656,
+    z: 663697,
+    heading: 32765,
     capacity: 12,
   },
   {

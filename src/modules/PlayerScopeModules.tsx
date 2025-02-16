@@ -10,7 +10,7 @@ export function PlayerScopeModules() {
         <CurrentBusStop />
         <BusStopBoardingProgress />
       </BusStopModule>
-      <PlayerCarInfo />
+      {/*<PlayerCarInfo />*/}
     </>
   );
 }

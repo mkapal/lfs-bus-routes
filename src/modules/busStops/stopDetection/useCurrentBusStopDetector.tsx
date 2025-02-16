@@ -2,7 +2,7 @@ import { useSetAtom } from "jotai";
 import { PacketType } from "node-insim/packets";
 import { useHumanPlayerScope, useOnPacket } from "react-node-insim";
 
-import { busStops } from "@/modules/busStops/busStops";
+import { busStops } from "@/modules/busStops/database/busStops";
 import { isWithinRadius } from "@/shared/coordinates";
 import {
   convertDegreesToLfsAngle,
@@ -53,7 +53,7 @@ export function useCurrentBusStopDetector() {
         headingDelta === null ? false : headingDelta <= HEADING_THRESHOLD;
 
       setCurrentBusStop(
-        isStopSpeed && isGoodAngle && foundBusStop ? foundBusStop.id : null,
+        isStopSpeed && isGoodAngle && foundBusStop ? foundBusStop : null,
       );
     });
   });

@@ -20,9 +20,10 @@
     "jotai-scope": "^0.7.3",
     "node-insim": "^4.6.1",
     "react": "^18.3.1",
-    "react-node-insim": "0.0.12",
+    "react-node-insim": "file:.yalc/react-node-insim",
     "rxjs": "^7.8.1",
-    "supports-color": "^9.4.0"
+    "supports-color": "^9.4.0",
+    "tedis": "^0.1.12"
   },
   "devDependencies": {
     "@types/debug": "^4.1.12",

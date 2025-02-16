@@ -1,7 +1,8 @@
 import { useSetAtom } from "jotai";
 import { useEffect } from "react";
 
-import { type BusStop, busStops } from "@/modules/busStops/busStops";
+import { busLines } from "@/modules/busStops/database/busLines";
+import { type BusStop, busStops } from "@/modules/busStops/database/busStops";
 import {
   busStopPassengersAtom,
   type Passenger,
@@ -19,7 +20,7 @@ export function useLiveBusStopPassengers() {
 
     setPassengers(new Map(initialPassengers));
 
-    const PASSENGER_ADD_INTERVAL = 2000;
+    const PASSENGER_ADD_INTERVAL = 10_000;
 
     const interval = setInterval(() => {
       setPassengers((prevValue) => {
@@ -28,15 +29,30 @@ export function useLiveBusStopPassengers() {
         >((prevEntry) => {
           const [busStop, passengers] = prevEntry;
 
-          const otherBusStops = busStops.filter(({ id }) => busStop.id !== id);
-          const randomId = Math.round(
-            Math.random() * (otherBusStops.length - 1),
+          if (busStop.capacity <= passengers.length) {
+            return prevEntry;
+          }
+
+          const busStopLines = busLines.filter(({ stops }) =>
+            stops.includes(busStop),
           );
+          const randomLineId = Math.round(
+            Math.random() * (busStopLines.length - 1),
+          );
+          const randomLine = busStopLines[randomLineId];
+
+          if (!randomLine) {
+            return prevEntry;
+          }
 
           // TODO destination must be only in direction of the lines leaving from the station
-          const randomDestination = otherBusStops[randomId];
+          const otherBusStops = busStops.filter(({ id }) => busStop.id !== id);
+          const randomDestinationId = Math.round(
+            Math.random() * (otherBusStops.length - 1),
+          );
+          const randomDestination = otherBusStops[randomDestinationId];
 
-          if (busStop.capacity <= passengers.length || !randomDestination) {
+          if (!randomDestination) {
             return prevEntry;
           }
 
@@ -44,6 +60,7 @@ export function useLiveBusStopPassengers() {
             ...passengers,
             {
               id: ++nextPassengerId,
+              line: randomLine,
               destination: randomDestination,
             },
           ];
