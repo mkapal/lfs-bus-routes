@@ -22,7 +22,7 @@ export function BusLineDetail({ busLine }: BusLineDetailProps) {
       >
         Stops ({busLine.stops.length})
       </Button>
-      <VStack top={top + 5} left={left} width={6} height={5} variant="dark">
+      <VStack top={top + 5} left={left} width={5} height={5} variant="dark">
         {busLine.stops.map((stop) => (
           <Button key={stop.id} align="right">
             {stop.id}
@@ -31,7 +31,7 @@ export function BusLineDetail({ busLine }: BusLineDetailProps) {
       </VStack>
       <VStack
         top={top + 5}
-        left={left + 6}
+        left={left + 5}
         width={20}
         height={5}
         variant="dark"

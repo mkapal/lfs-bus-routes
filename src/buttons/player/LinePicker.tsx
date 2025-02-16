@@ -24,7 +24,7 @@ export function LinePicker() {
         isOn={isPickerOpen}
         onToggle={setIsPickerOpen}
       >
-        Pick a line
+        Select a line
       </ToggleButton>
       {isPickerOpen && (
         <VStack top={top + 5} left={50} width={25} height={5} variant="dark">

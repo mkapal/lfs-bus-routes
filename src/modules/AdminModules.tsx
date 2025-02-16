@@ -1,7 +1,7 @@
 import { useConnectionScope } from "react-node-insim";
 
-import { BusLineList } from "@/buttons/connection/BusLineList";
-import { BusStopList } from "@/buttons/connection/BusStopList";
+import { Lines } from "@/buttons/connection/Lines";
+import { Stops } from "@/buttons/connection/Stops";
 
 export function AdminModules() {
   const connection = useConnectionScope();

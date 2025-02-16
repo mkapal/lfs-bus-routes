@@ -1,13 +1,13 @@
-import { BusLineList } from "@/buttons/connection/BusLineList";
-import { BusStopList } from "@/buttons/connection/BusStopList";
+import { Lines } from "@/buttons/connection/Lines";
+import { Stops } from "@/buttons/connection/Stops";
 import { Welcome } from "@/buttons/global/Welcome";
 
 export function ConnectionScopeModules() {
   return (
     <>
       <Welcome />
-      <BusStopList />
-      <BusLineList />
+      <Stops />
+      <Lines />
     </>
   );
 }

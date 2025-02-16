@@ -25,10 +25,6 @@ export function useCurrentBusStopDetector() {
         return;
       }
 
-      if (currentLineState === null) {
-        return;
-      }
-
       const foundBusStop = busStops.find((busStop) =>
         isWithinRadius({
           current: {
@@ -54,14 +50,12 @@ export function useCurrentBusStopDetector() {
         : null;
       const isGoodAngle =
         headingDelta === null ? false : headingDelta <= HEADING_THRESHOLD;
-      const isCorrectLine = foundBusStop
-        ? currentLineState.line?.stops.includes(foundBusStop)
-        : false;
+      // const isCorrectLine = foundBusStop
+      //   ? !!currentLineState?.line?.stops.includes(foundBusStop)
+      //   : false;
 
       const currentBusStop =
-        isStopSpeed && isGoodAngle && foundBusStop && isCorrectLine
-          ? foundBusStop
-          : null;
+        isStopSpeed && isGoodAngle && foundBusStop ? foundBusStop : null;
 
       setCurrentLineState({
         ...currentLineState,

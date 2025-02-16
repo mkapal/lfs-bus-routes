@@ -10,7 +10,7 @@ const top = 5;
 export function CurrentLine() {
   const [currentLineState, setCurrentLineState] = useAtom(currentLineStateAtom);
 
-  if (!currentLineState) {
+  if (!currentLineState.line) {
     return <LinePicker />;
   }
 
@@ -33,7 +33,12 @@ export function CurrentLine() {
         height={5}
         variant="light"
         color="yellow"
-        onClick={() => setCurrentLineState(null)}
+        onClick={() =>
+          setCurrentLineState({
+            ...currentLineState,
+            line: null,
+          })
+        }
       >
         Cancel
       </Button>

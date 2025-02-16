@@ -17,7 +17,6 @@ export function HideButtonsInAutocrossEditor({
   const [isInAutocrossEditor, setIsInAutocrossEditor] = useState(false);
 
   useOnPacket(PacketType.ISP_CIM, (packet) => {
-    console.log(packet);
     setIsInAutocrossEditor(
       packet.UCID === connection.UCID &&
         packet.Mode === InterfaceMode.CIM_SHIFTU &&
