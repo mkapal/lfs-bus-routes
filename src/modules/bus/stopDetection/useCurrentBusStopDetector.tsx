@@ -3,7 +3,7 @@ import { PacketType } from "node-insim/packets";
 import { useHumanPlayerScope, useOnPacket } from "react-node-insim";
 
 import { busStops } from "@/modules/bus/database/busStops";
-import { currentLineStateAtom } from "@/modules/bus/lines/currentLineStateAtom";
+import { currentBusRouteStateAtom } from "@/modules/bus/routes/currentBusRouteStateAtom";
 import { isWithinRadius } from "@/shared/coordinates";
 import {
   convertDegreesToLfsAngle,
@@ -17,7 +17,9 @@ const Z_POSITION_THRESHOLD = convertMetersToLfsCarPositionUnits(0.5);
 
 export function useCurrentBusStopDetector() {
   const player = useHumanPlayerScope();
-  const [currentLineState, setCurrentLineState] = useAtom(currentLineStateAtom);
+  const [currentBusRouteState, setCurrentBusRouteState] = useAtom(
+    currentBusRouteStateAtom,
+  );
 
   useOnPacket(PacketType.ISP_MCI, (packet) => {
     packet.Info.forEach((info) => {
@@ -57,8 +59,8 @@ export function useCurrentBusStopDetector() {
       const currentBusStop =
         isStopSpeed && isGoodAngle && foundBusStop ? foundBusStop : null;
 
-      setCurrentLineState({
-        ...currentLineState,
+      setCurrentBusRouteState({
+        ...currentBusRouteState,
         stop: currentBusStop,
       });
     });

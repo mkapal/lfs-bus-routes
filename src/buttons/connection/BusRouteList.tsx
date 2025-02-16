@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { Button, ToggleButton, VStack } from "react-node-insim";
 
-import { BusLineDetail } from "@/buttons/connection/BusLineDetail";
-import { type BusLine, busLines } from "@/modules/bus/database/busLines";
+import { BusRouteDetail } from "@/buttons/connection/BusRouteDetail";
+import { type BusRoute, busRoutes } from "@/modules/bus/database/busRoutes";
 
 const top = 25;
 const left = 60;
 
-export function BusLineList() {
-  const [busLineDetail, setBusLineDetail] = useState<{
-    busLine: BusLine | null;
-  }>({
-    busLine: null,
-  });
+export function BusRouteList() {
+  const [selectedBusRoute, setSelectedBusRoute] = useState<BusRoute | null>(
+    null,
+  );
 
   return (
     <>
@@ -27,9 +25,9 @@ export function BusLineList() {
         ID
       </Button>
       <VStack top={top + 5} left={left} width={5} height={5} variant="dark">
-        {busLines.map((busLine) => (
-          <Button align="right" key={busLine.id}>
-            {busLine.id}
+        {busRoutes.map((busRoute) => (
+          <Button align="right" key={busRoute.id}>
+            {busRoute.id}
           </Button>
         ))}
       </VStack>
@@ -50,19 +48,14 @@ export function BusLineList() {
         height={5}
         variant="light"
       >
-        {busLines.map((busLine) => (
+        {busRoutes.map((busRoute) => (
           <ToggleButton
-            key={busLine.id}
-            isOn={busLineDetail.busLine === busLine}
-            onToggle={(value) =>
-              setBusLineDetail({
-                ...busLineDetail,
-                busLine: value ? busLine : null,
-              })
-            }
+            key={busRoute.id}
+            isOn={selectedBusRoute === busRoute}
+            onToggle={(value) => setSelectedBusRoute(value ? busRoute : null)}
             align="left"
           >
-            {busLine.name}
+            {busRoute.name}
           </ToggleButton>
         ))}
       </VStack>
@@ -83,15 +76,13 @@ export function BusLineList() {
         height={5}
         variant="dark"
       >
-        {busLines.map((busLine) => (
-          <Button key={busLine.id} align="right">
-            {busLine.stops.length}
+        {busRoutes.map((busRoute) => (
+          <Button key={busRoute.id} align="right">
+            {busRoute.stops.length}
           </Button>
         ))}
       </VStack>
-      {busLineDetail.busLine && (
-        <BusLineDetail busLine={busLineDetail.busLine} />
-      )}
+      {selectedBusRoute && <BusRouteDetail busRoute={selectedBusRoute} />}
     </>
   );
 }

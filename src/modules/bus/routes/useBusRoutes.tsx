@@ -3,12 +3,12 @@ import { IS_TINY, PacketType, TinyType } from "node-insim/packets";
 import { useState } from "react";
 import { useOnConnect, useOnPacket } from "react-node-insim";
 
-import { busLines } from "@/modules/bus/database/busLines";
-import { busLinesAtom } from "@/modules/bus/lines/busLinesAtom";
+import { busRoutes } from "@/modules/bus/database/busRoutes";
+import { busRoutesAtom } from "@/modules/bus/routes/busRoutesAtom";
 
-export function useBusLines() {
+export function useBusRoutes() {
   const [track, setTrack] = useState<string | null>(null);
-  const setBusLines = useSetAtom(busLinesAtom);
+  const setBusRoutes = useSetAtom(busRoutesAtom);
 
   useOnConnect((_packet, inSim) => {
     inSim.send(
@@ -26,11 +26,11 @@ export function useBusLines() {
       return;
     }
 
-    const busLinesForCurrentTrack = busLines.filter(
-      (line) => line.track === newTrack,
+    const busRoutesForCurrentTrack = busRoutes.filter(
+      (busRoute) => busRoute.track === newTrack,
     );
 
     setTrack(newTrack);
-    setBusLines(busLinesForCurrentTrack);
+    setBusRoutes(busRoutesForCurrentTrack);
   });
 }

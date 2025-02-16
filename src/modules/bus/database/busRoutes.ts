@@ -5,7 +5,7 @@ import {
 import { type Coordinates3D } from "@/shared/coordinates";
 import { type Track } from "@/shared/tracks";
 
-export type BusLine = {
+export type BusRoute = {
   id: number;
   track: Track;
   name: string;
@@ -15,7 +15,7 @@ export type BusLine = {
   stops: BusStop[];
 };
 
-const westhillBusLines: BusLine[] = [
+const westhillBusRoutes: BusRoute[] = [
   {
     id: 1,
     track: "WE",
@@ -30,4 +30,4 @@ const westhillBusLines: BusLine[] = [
   },
 ];
 
-export const busLines: BusLine[] = [...westhillBusLines];
+export const busRoutes: BusRoute[] = [...westhillBusRoutes];

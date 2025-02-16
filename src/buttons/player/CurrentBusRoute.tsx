@@ -1,17 +1,19 @@
 import { useAtom } from "jotai";
 import { Button } from "react-node-insim";
 
-import { LinePicker } from "@/buttons/player/LinePicker";
-import { currentLineStateAtom } from "@/modules/bus/lines/currentLineStateAtom";
+import { BusRoutePicker } from "@/buttons/player/BusRoutePicker";
+import { currentBusRouteStateAtom } from "@/modules/bus/routes/currentBusRouteStateAtom";
 import { HideButtonsInAutocrossEditor } from "@/shared/buttons/HideButtonsInAutocrossEditor";
 
 const top = 5;
 
-export function CurrentLine() {
-  const [currentLineState, setCurrentLineState] = useAtom(currentLineStateAtom);
+export function CurrentBusRoute() {
+  const [currentBusRouteState, setCurrentBusRouteState] = useAtom(
+    currentBusRouteStateAtom,
+  );
 
-  if (!currentLineState.line) {
-    return <LinePicker />;
+  if (!currentBusRouteState.route) {
+    return <BusRoutePicker />;
   }
 
   return (
@@ -24,7 +26,7 @@ export function CurrentLine() {
         variant="dark"
         align="left"
       >
-        Line: {currentLineState.line.name}
+        Route: {currentBusRouteState.route.name}
       </Button>
       <Button
         top={top}
@@ -34,9 +36,9 @@ export function CurrentLine() {
         variant="light"
         color="yellow"
         onClick={() =>
-          setCurrentLineState({
-            ...currentLineState,
-            line: null,
+          setCurrentBusRouteState({
+            ...currentBusRouteState,
+            route: null,
           })
         }
       >

@@ -1,15 +1,15 @@
 import { Button, VStack } from "react-node-insim";
 
-import { type BusLine } from "@/modules/bus/database/busLines";
+import { type BusRoute } from "@/modules/bus/database/busRoutes";
 
-type BusLineDetailProps = {
-  busLine: BusLine;
+type BusRouteDetailProps = {
+  busRoute: BusRoute;
 };
 
 const top = 25;
 const left = 105;
 
-export function BusLineDetail({ busLine }: BusLineDetailProps) {
+export function BusRouteDetail({ busRoute }: BusRouteDetailProps) {
   return (
     <>
       <Button
@@ -20,10 +20,10 @@ export function BusLineDetail({ busLine }: BusLineDetailProps) {
         color="title"
         align="left"
       >
-        Stops ({busLine.stops.length})
+        Stops ({busRoute.stops.length})
       </Button>
       <VStack top={top + 5} left={left} width={5} height={5} variant="dark">
-        {busLine.stops.map((stop) => (
+        {busRoute.stops.map((stop) => (
           <Button key={stop.id} align="right">
             {stop.id}
           </Button>
@@ -36,7 +36,7 @@ export function BusLineDetail({ busLine }: BusLineDetailProps) {
         height={5}
         variant="dark"
       >
-        {busLine.stops.map((stop) => (
+        {busRoute.stops.map((stop) => (
           <Button key={stop.id} align="left">
             {stop.name}
           </Button>

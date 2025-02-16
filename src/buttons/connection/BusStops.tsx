@@ -1,28 +1,28 @@
 import { useState } from "react";
 import { ToggleButton } from "react-node-insim";
 
-import { BusLineList } from "@/buttons/connection/BusLineList";
+import { BusStopList } from "@/buttons/connection/BusStopList";
 import { HideButtonsInAutocrossEditor } from "@/shared/buttons/HideButtonsInAutocrossEditor";
 
 const top = 5;
 
-export function Lines() {
-  const [isBusLineListOpen, setIsBusLineListOpen] = useState(false);
+export function BusStops() {
+  const [isBusStopListOpen, setIsBusStopListOpen] = useState(false);
 
   return (
     <HideButtonsInAutocrossEditor>
       <ToggleButton
         top={top}
-        left={130}
+        left={120}
         width={10}
         height={5}
-        isOn={isBusLineListOpen}
-        onToggle={setIsBusLineListOpen}
+        isOn={isBusStopListOpen}
+        onToggle={setIsBusStopListOpen}
         variant="light"
       >
-        Lines
+        Stops
       </ToggleButton>
-      {isBusLineListOpen && <BusLineList />}
+      {isBusStopListOpen && <BusStopList />}
     </HideButtonsInAutocrossEditor>
   );
 }

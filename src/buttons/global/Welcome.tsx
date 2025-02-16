@@ -67,7 +67,7 @@ export function Welcome() {
             Features in progress:
           </Button>
           <Button width={92} height={6} align="left">
-            - bus lines with stops
+            - bus routes with stops
           </Button>
           <Button width={92} height={6} align="left">
             - traffic lights

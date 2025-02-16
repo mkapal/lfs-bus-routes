@@ -4,14 +4,16 @@ import { useEffect, useRef } from "react";
 import { useHumanPlayerScope, useOnPacket } from "react-node-insim";
 
 import { busStopBoardingProgressAtom } from "@/modules/bus/boarding/busStopBoardingProgressAtom";
-import { currentLineStateAtom } from "@/modules/bus/lines/currentLineStateAtom";
 import { busStopPassengersAtom } from "@/modules/bus/passengers/busStopPassengersAtom";
+import { currentBusRouteStateAtom } from "@/modules/bus/routes/currentBusRouteStateAtom";
 import lfsColor from "@/shared/lfsColor";
 import { log } from "@/shared/log";
 
 export function useBusStopBoardingProgress() {
   const player = useHumanPlayerScope();
-  const [currentLineState, setCurrentLineState] = useAtom(currentLineStateAtom);
+  const [currentBusRouteState, setCurrentBusRouteState] = useAtom(
+    currentBusRouteStateAtom,
+  );
   const passengersByStop = useAtomValue(busStopPassengersAtom);
   const setBusStopProgress = useSetAtom(busStopBoardingProgressAtom);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -28,13 +30,13 @@ export function useBusStopBoardingProgress() {
   };
 
   useEffect(() => {
-    if (!currentLineState.line || !currentLineState.stop) {
+    if (!currentBusRouteState.route || !currentBusRouteState.stop) {
       endProgress();
-      log(player.PName, "no line or stop exists");
+      log(player.PName, "no route or stop exists");
       return;
     }
 
-    const passengers = passengersByStop.get(currentLineState.stop);
+    const passengers = passengersByStop.get(currentBusRouteState.stop);
 
     if (!passengers) {
       log(player.PName, "no passengers");
@@ -69,20 +71,20 @@ export function useBusStopBoardingProgress() {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [currentLineState.stop?.id, currentLineState.line?.id]);
+  }, [currentBusRouteState.stop?.id, currentBusRouteState.route?.id]);
 
   useOnPacket(PacketType.ISP_PLL, (packet, inSim) => {
     if (packet.PLID === player.PLID) {
       log(player.PName, "trip cancelled");
       inSim.sendMessageToConnection(
         player.UCID,
-        lfsColor.red("Bus line trip cancelled"),
+        lfsColor.red("Bus route trip cancelled"),
         MessageSound.SND_ERROR,
       );
       endProgress();
-      setCurrentLineState((prev) => ({
+      setCurrentBusRouteState((prev) => ({
         ...prev,
-        line: null,
+        route: null,
         stop: null,
       }));
     }
@@ -93,13 +95,13 @@ export function useBusStopBoardingProgress() {
       log(player.PName, "trip cancelled");
       inSim.sendMessageToPlayer(
         player.PLID,
-        lfsColor.red("Bus line trip cancelled"),
+        lfsColor.red("Bus route trip cancelled"),
         MessageSound.SND_ERROR,
       );
       endProgress();
-      setCurrentLineState((prev) => ({
+      setCurrentBusRouteState((prev) => ({
         ...prev,
-        line: null,
+        route: null,
         stop: null,
       }));
     }

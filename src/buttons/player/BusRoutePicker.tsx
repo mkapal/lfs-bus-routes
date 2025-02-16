@@ -7,18 +7,18 @@ import {
   VStack,
 } from "react-node-insim";
 
-import { busLinesAtom } from "@/modules/bus/lines/busLinesAtom";
-import { currentLineStateAtom } from "@/modules/bus/lines/currentLineStateAtom";
+import { busRoutesAtom } from "@/modules/bus/routes/busRoutesAtom";
+import { currentBusRouteStateAtom } from "@/modules/bus/routes/currentBusRouteStateAtom";
 import { HideButtonsInAutocrossEditor } from "@/shared/buttons/HideButtonsInAutocrossEditor";
 import { log } from "@/shared/log";
 
 const top = 5;
 
-export function LinePicker() {
+export function BusRoutePicker() {
   const player = useHumanPlayerScope();
   const [isPickerOpen, setIsPickerOpen] = useState(false);
-  const setCurrentLineState = useSetAtom(currentLineStateAtom);
-  const busLines = useAtomValue(busLinesAtom);
+  const setCurrentBusRouteState = useSetAtom(currentBusRouteStateAtom);
+  const busRoutes = useAtomValue(busRoutesAtom);
 
   return (
     <HideButtonsInAutocrossEditor>
@@ -31,22 +31,25 @@ export function LinePicker() {
         isOn={isPickerOpen}
         onToggle={setIsPickerOpen}
       >
-        Select a line
+        Select a route
       </ToggleButton>
       {isPickerOpen && (
         <VStack top={top + 5} left={50} width={25} height={5} variant="dark">
-          {busLines.map((line) => (
+          {busRoutes.map((busRoute) => (
             <Button
-              key={line.id}
+              key={busRoute.id}
               onClick={() => {
-                log(player.PName, `selected line ${line.name} (${line.id})`);
-                setCurrentLineState((prevState) => ({
+                log(
+                  player.PName,
+                  `selected route: ${busRoute.name} (${busRoute.id})`,
+                );
+                setCurrentBusRouteState((prevState) => ({
                   ...prevState,
-                  line,
+                  route: busRoute,
                 }));
               }}
             >
-              {line.name}
+              {busRoute.name}
             </Button>
           ))}
         </VStack>
