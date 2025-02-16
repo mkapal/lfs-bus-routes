@@ -12,7 +12,7 @@ export function TopBar() {
         <ToggleButton
           isOn={isBusStopListOpen}
           onToggle={setIsBusStopListOpen}
-          width={22}
+          width={16}
           variant="light"
         >
           Bus stops

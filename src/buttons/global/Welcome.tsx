@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Flex, useConnectionScope } from "react-node-insim";
 
+import { FullScreenFlex } from "@/shared/buttons/FullScreenFlex";
 import { redis } from "@/shared/redis";
 
 export function Welcome() {
@@ -33,14 +34,7 @@ export function Welcome() {
   }
 
   return (
-    <Flex
-      top={0}
-      left={0}
-      width={200}
-      height={200}
-      alignItems="center"
-      justifyContent="center"
-    >
+    <FullScreenFlex alignItems="center" justifyContent="center">
       <Flex
         top={0}
         left={0}
@@ -61,26 +55,26 @@ export function Welcome() {
           alignItems="start"
           padding={4}
         >
-          <Button width={100} height={10} color="title" align="left">
+          <Button width={92} height={10} color="title" align="left">
             City Bus Driving
           </Button>
-          <Button width={100} height={6} align="left">
+          <Button width={92} height={6} align="left">
             This server is still in development. Some features are not fully
             working yet.
           </Button>
-          <Button width={100} height={6} align="left">
+          <Button width={92} height={6} align="left">
             Features in progress:
           </Button>
-          <Button width={100} height={6} align="left">
+          <Button width={92} height={6} align="left">
             - bus lines with stops
           </Button>
-          <Button width={100} height={6} align="left">
+          <Button width={92} height={6} align="left">
             - traffic lights
           </Button>
-          <Button width={100} height={6} align="left">
+          <Button width={92} height={6} align="left">
             - pedestrian crossings
           </Button>
-          <Button width={100} height={6} align="left">
+          <Button width={92} height={6} align="left">
             - bus mass increase with passengers onboard
           </Button>
         </Flex>
@@ -95,6 +89,6 @@ export function Welcome() {
           OK
         </Button>
       </Flex>
-    </Flex>
+    </FullScreenFlex>
   );
 }

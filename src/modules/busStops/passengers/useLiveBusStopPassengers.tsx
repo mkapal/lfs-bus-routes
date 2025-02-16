@@ -20,7 +20,7 @@ export function useLiveBusStopPassengers() {
 
     setPassengers(new Map(initialPassengers));
 
-    const PASSENGER_ADD_INTERVAL = 10_000;
+    const PASSENGER_ADD_INTERVAL = 2_000;
 
     const interval = setInterval(() => {
       setPassengers((prevValue) => {
