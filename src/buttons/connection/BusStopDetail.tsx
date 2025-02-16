@@ -1,6 +1,6 @@
 import { Button, VStack } from "react-node-insim";
 
-import { type BusStop } from "@/modules/busStops/database/busStops";
+import { type BusStop } from "@/modules/bus/database/busStops";
 import { buildCopyPositionCommand } from "@/shared/commands";
 import {
   convertDegreesToLfsAngle,
@@ -12,31 +12,32 @@ type BusStopDetailProps = {
   busStop: BusStop;
 };
 
+const top = 30;
+const left = 105;
+
 export function BusStopDetail({ busStop }: BusStopDetailProps) {
   return (
     <>
-      <VStack top={30} left={100} width={12} height={5} variant="dark">
-        <Button align="left">ID</Button>
+      <VStack top={top} left={left} width={12} height={5} variant="dark">
         <Button align="left">X</Button>
         <Button align="left">Y</Button>
         <Button align="left">Z</Button>
         <Button align="left">Heading</Button>
         <Button align="left">Capacity</Button>
       </VStack>
-      <VStack top={30} left={112} width={15} height={5} variant="dark">
-        <Button align="left">{busStop.id}</Button>
+      <VStack top={top} left={left + 12} width={15} height={5} variant="dark">
         <Button align="left">{busStop.x}</Button>
         <Button align="left">{busStop.y}</Button>
         <Button align="left">{busStop.z}</Button>
         <Button align="left">{busStop.heading}</Button>
         <Button align="left">{busStop.capacity}</Button>
       </VStack>
-      <Button top={30} left={128} width={25} height={5} color="white">
+      <Button top={top} left={left + 28} width={25} height={5} color="white">
         Copy position command:
       </Button>
       <Button
-        top={30}
-        left={153}
+        top={top}
+        left={left + 53}
         width={3}
         height={5}
         variant="light"

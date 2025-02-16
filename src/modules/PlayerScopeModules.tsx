@@ -1,12 +1,14 @@
 import { CurrentBusStop } from "@/buttons/player/CurrentBusStop";
-import { BusStopModule } from "@/modules/busStops/BusStopModule";
+import { CurrentLine } from "@/buttons/player/CurrentLine";
+import { BusLineModule } from "@/modules/bus/BusLineModule";
 
 export function PlayerScopeModules() {
   return (
     <>
-      <BusStopModule>
+      <BusLineModule>
         <CurrentBusStop />
-      </BusStopModule>
+        <CurrentLine />
+      </BusLineModule>
       {/*<PlayerCarInfo />*/}
     </>
   );

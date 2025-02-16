@@ -1,5 +1,8 @@
+import { type Track } from "@/shared/tracks";
+
 export type BusStop = {
   id: number;
+  track: Track;
   name: string;
   x: number;
   y: number;
@@ -8,9 +11,10 @@ export type BusStop = {
   capacity: number;
 };
 
-export const busStops: BusStop[] = [
+export const westhillBusStops: BusStop[] = [
   {
     id: 1,
+    track: "WE",
     name: "Central 1",
     x: -11031097,
     y: 15502140,
@@ -20,6 +24,7 @@ export const busStops: BusStop[] = [
   },
   {
     id: 2,
+    track: "WE",
     name: "Central 2",
     x: -10978678,
     y: 12542524,
@@ -29,6 +34,7 @@ export const busStops: BusStop[] = [
   },
   {
     id: 3,
+    track: "WE",
     name: "Newbury South",
     x: -10872567,
     y: 8169656,
@@ -38,6 +44,7 @@ export const busStops: BusStop[] = [
   },
   {
     id: 4,
+    track: "WE",
     name: "Westlodge Hotel",
     x: -10178678,
     y: 12352524,
@@ -46,3 +53,5 @@ export const busStops: BusStop[] = [
     capacity: 20,
   },
 ];
+
+export const busStops: BusStop[] = [...westhillBusStops];

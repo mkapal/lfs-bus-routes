@@ -1,22 +1,22 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect } from "react";
 
-import { busStopBoardingProgressAtom } from "@/modules/busStops/boarding/busStopBoardingProgressAtom";
-import { busStopPassengersAtom } from "@/modules/busStops/passengers/busStopPassengersAtom";
-import { currentBusStopAtom } from "@/modules/busStops/stopDetection/currentBusStopAtom";
+import { busStopBoardingProgressAtom } from "@/modules/bus/boarding/busStopBoardingProgressAtom";
+import { currentLineStateAtom } from "@/modules/bus/lines/currentLineStateAtom";
+import { busStopPassengersAtom } from "@/modules/bus/passengers/busStopPassengersAtom";
 
 export function useBusStopBoardingProgress() {
-  const busStop = useAtomValue(currentBusStopAtom);
+  const currentLineState = useAtomValue(currentLineStateAtom);
   const passengersByStop = useAtomValue(busStopPassengersAtom);
   const setBusStopProgress = useSetAtom(busStopBoardingProgressAtom);
 
   useEffect(() => {
-    if (!busStop) {
+    if (!currentLineState || !currentLineState.stop) {
       setBusStopProgress(null);
       return;
     }
 
-    const passengers = passengersByStop.get(busStop);
+    const passengers = passengersByStop.get(currentLineState.stop);
 
     if (!passengers) {
       return;
@@ -38,5 +38,5 @@ export function useBusStopBoardingProgress() {
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, [busStop]);
+  }, [currentLineState?.stop]);
 }

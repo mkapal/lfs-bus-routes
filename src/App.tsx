@@ -6,6 +6,7 @@ import {
   HumanPlayerScopeProvider,
 } from "react-node-insim";
 
+import { AdminModules } from "@/modules/AdminModules";
 import { ConnectionScopeModules } from "@/modules/ConnectionScopeModules";
 import { GlobalModules } from "@/modules/GlobalModules";
 import { PlayerScopeModules } from "@/modules/PlayerScopeModules";
@@ -35,6 +36,7 @@ export function App() {
       </GlobalScopeProvider>
       <ConnectionScopeProvider>
         <ConnectionScopeModules />
+        <AdminModules />
         <HumanPlayerScopeProvider>
           <PlayerScopeModules />
         </HumanPlayerScopeProvider>

@@ -1,12 +1,11 @@
 import { useSetAtom } from "jotai";
 import { useEffect } from "react";
 
-import { busLines } from "@/modules/busStops/database/busLines";
-import { type BusStop, busStops } from "@/modules/busStops/database/busStops";
+import { type BusStop, busStops } from "@/modules/bus/database/busStops";
 import {
   busStopPassengersAtom,
   type Passenger,
-} from "@/modules/busStops/passengers/busStopPassengersAtom";
+} from "@/modules/bus/passengers/busStopPassengersAtom";
 
 let nextPassengerId = 0;
 
@@ -33,18 +32,6 @@ export function useLiveBusStopPassengers() {
             return prevEntry;
           }
 
-          const busStopLines = busLines.filter(({ stops }) =>
-            stops.includes(busStop),
-          );
-          const randomLineId = Math.round(
-            Math.random() * (busStopLines.length - 1),
-          );
-          const randomLine = busStopLines[randomLineId];
-
-          if (!randomLine) {
-            return prevEntry;
-          }
-
           // TODO destination must be only in direction of the lines leaving from the station
           const otherBusStops = busStops.filter(({ id }) => busStop.id !== id);
           const randomDestinationId = Math.round(
@@ -60,7 +47,6 @@ export function useLiveBusStopPassengers() {
             ...passengers,
             {
               id: ++nextPassengerId,
-              line: randomLine,
               destination: randomDestination,
             },
           ];
