@@ -28,21 +28,23 @@ export function BusStopList() {
         Name
       </Button>
       <VStack top={30} left={60} width={25} height={5} variant="light">
-        {Array.from(busStopPassengers.entries()).map(([busStop]) => (
-          <ToggleButton
-            isOn={busStopDetail.busStop === busStop}
-            onToggle={(value) =>
-              setBusStopDetail({
-                ...busStopDetail,
-                busStop: value ? busStop : null,
-              })
-            }
-            key={busStop.id}
-            align="left"
-          >
-            {busStop.name}
-          </ToggleButton>
-        ))}
+        {Array.from(busStopPassengers.entries())
+          .toSorted(([a], [b]) => a.name.localeCompare(b.name))
+          .map(([busStop]) => (
+            <ToggleButton
+              isOn={busStopDetail.busStop === busStop}
+              onToggle={(value) =>
+                setBusStopDetail({
+                  ...busStopDetail,
+                  busStop: value ? busStop : null,
+                })
+              }
+              key={busStop.id}
+              align="left"
+            >
+              {busStop.name}
+            </ToggleButton>
+          ))}
       </VStack>
       <Button
         top={25}

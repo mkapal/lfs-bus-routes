@@ -1,6 +1,12 @@
 import { Button, VStack } from "react-node-insim";
 
 import { type BusStop } from "@/modules/busStops/database/busStops";
+import { buildCopyPositionCommand } from "@/shared/commands";
+import {
+  convertDegreesToLfsAngle,
+  convertLfsAngleToDegrees,
+  convertMetersToLfsCarPositionUnits,
+} from "@/shared/lfsUnits";
 
 type BusStopDetailProps = {
   busStop: BusStop;
@@ -25,6 +31,34 @@ export function BusStopDetail({ busStop }: BusStopDetailProps) {
         <Button align="left">{busStop.heading}</Button>
         <Button align="left">{busStop.capacity}</Button>
       </VStack>
+      <Button top={30} left={128} width={25} height={5} color="white">
+        Copy position command:
+      </Button>
+      <Button
+        top={30}
+        left={153}
+        width={3}
+        height={5}
+        variant="light"
+        initializeDialogWithButtonText
+        caption="Go to Shift+U mode and paste this command into the chat"
+        maxTypeInChars={95}
+        onType={() => {
+          // do nothing
+        }}
+      >
+        {buildCopyPositionCommand({
+          x: busStop.x,
+          y: busStop.y,
+          z: busStop.z + convertMetersToLfsCarPositionUnits(10),
+          heading: convertDegreesToLfsAngle(
+            convertLfsAngleToDegrees(busStop.heading) + 90,
+          ),
+          pitch: 16000,
+          roll: 0.0,
+          fov: 90,
+        })}
+      </Button>
     </>
   );
 }
