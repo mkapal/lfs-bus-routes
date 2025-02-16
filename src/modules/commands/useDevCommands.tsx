@@ -1,6 +1,7 @@
 import { PacketType } from "node-insim/packets";
 import { useOnPacket } from "react-node-insim";
 
+import { log } from "@/shared/log";
 import { useMultiCarInfoRef } from "@/shared/useMultiCarInfoRef";
 
 export function useDevCommands() {
@@ -16,10 +17,10 @@ export function useDevCommands() {
         }
 
         // console.log(`PLID: ${multiCarInfo.PLID}`);
-        console.log(`x: ${multiCarInfo.X},`);
-        console.log(`y: ${multiCarInfo.Y},`);
-        console.log(`z: ${multiCarInfo.Z},`);
-        console.log(`heading: ${multiCarInfo.Heading},`);
+        log(`x: ${multiCarInfo.X},`);
+        log(`y: ${multiCarInfo.Y},`);
+        log(`z: ${multiCarInfo.Z},`);
+        log(`heading: ${multiCarInfo.Heading},`);
         // console.log(`Speed: ${multiCarInfo.Speed}`);
         // console.log(`Direction: ${multiCarInfo.Direction}`);
         // console.log(`AngVel: ${multiCarInfo.AngVel}`);

@@ -1,3 +1,4 @@
+import { log } from "debug";
 import { useEffect, useState } from "react";
 import {
   ConnectionScopeProvider,
@@ -18,10 +19,10 @@ export function App() {
   useEffect(() => {
     redis.on("connect", () => {
       setIsLoading(false);
-      console.log("Redis connected");
+      log("Redis connected");
     });
     redis.on("error", (err) => {
-      console.log("Redis error", err);
+      log("Redis error", err);
     });
   }, []);
 

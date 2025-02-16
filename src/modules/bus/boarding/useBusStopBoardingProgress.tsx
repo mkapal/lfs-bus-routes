@@ -7,6 +7,7 @@ import { busStopBoardingProgressAtom } from "@/modules/bus/boarding/busStopBoard
 import { currentLineStateAtom } from "@/modules/bus/lines/currentLineStateAtom";
 import { busStopPassengersAtom } from "@/modules/bus/passengers/busStopPassengersAtom";
 import lfsColor from "@/shared/lfsColor";
+import { log } from "@/shared/log";
 
 export function useBusStopBoardingProgress() {
   const player = useHumanPlayerScope();
@@ -29,29 +30,29 @@ export function useBusStopBoardingProgress() {
   useEffect(() => {
     if (!currentLineState.line || !currentLineState.stop) {
       endProgress();
-      console.log("no line or stop");
+      log(player.PName, "no line or stop exists");
       return;
     }
 
     const passengers = passengersByStop.get(currentLineState.stop);
 
     if (!passengers) {
-      console.log("no passengers");
+      log(player.PName, "no passengers");
       return;
     }
 
-    console.log("initial progress");
+    log(player.PName, "initial progress");
     setBusStopProgress(0);
 
     intervalRef.current = setInterval(() => {
-      console.log("update progress");
+      log(player.PName, "update progress");
       setBusStopProgress((prevValue) =>
         prevValue === null ? 1 : prevValue + 1,
       );
     }, 1000);
     timeoutRef.current = setTimeout(
       () => {
-        console.log("end progress");
+        log(player.PName, "end progress");
         if (intervalRef.current) {
           clearInterval(intervalRef.current);
         }
@@ -72,7 +73,7 @@ export function useBusStopBoardingProgress() {
 
   useOnPacket(PacketType.ISP_PLL, (packet, inSim) => {
     if (packet.PLID === player.PLID) {
-      console.log("yes");
+      log(player.PName, "trip cancelled");
       inSim.sendMessageToConnection(
         player.UCID,
         lfsColor.red("Bus line trip cancelled"),
@@ -89,6 +90,7 @@ export function useBusStopBoardingProgress() {
 
   useOnPacket(PacketType.ISP_PLP, (packet, inSim) => {
     if (packet.PLID === player.PLID) {
+      log(player.PName, "trip cancelled");
       inSim.sendMessageToPlayer(
         player.PLID,
         lfsColor.red("Bus line trip cancelled"),

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Flex, useConnectionScope } from "react-node-insim";
 
 import { FullScreenFlex } from "@/shared/buttons/FullScreenFlex";
+import { log } from "@/shared/log";
 import { redis } from "@/shared/redis";
 
 export function Welcome() {
@@ -12,7 +13,7 @@ export function Welcome() {
     redis
       .hget(`lfsDrivingInSim:${connection.UName}`, "welcomeConfirmed")
       .then((hasConfirmed) => {
-        console.log(connection.UName, "connection already confirmed");
+        log(connection.UName, "connection already confirmed");
         if (hasConfirmed !== "1") {
           setIsShown(true);
         }
@@ -20,7 +21,7 @@ export function Welcome() {
   }, []);
 
   const handleConfirm = async () => {
-    console.log(connection.UName, "confirmed");
+    log(connection.UName, "confirmed");
     await redis.hset(
       `lfsDrivingInSim:${connection.UName}`,
       "welcomeConfirmed",

@@ -1,14 +1,21 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useState } from "react";
-import { Button, ToggleButton, VStack } from "react-node-insim";
+import {
+  Button,
+  ToggleButton,
+  useHumanPlayerScope,
+  VStack,
+} from "react-node-insim";
 
 import { busLinesAtom } from "@/modules/bus/lines/busLinesAtom";
 import { currentLineStateAtom } from "@/modules/bus/lines/currentLineStateAtom";
 import { HideButtonsInAutocrossEditor } from "@/shared/buttons/HideButtonsInAutocrossEditor";
+import { log } from "@/shared/log";
 
 const top = 5;
 
 export function LinePicker() {
+  const player = useHumanPlayerScope();
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const setCurrentLineState = useSetAtom(currentLineStateAtom);
   const busLines = useAtomValue(busLinesAtom);
@@ -31,12 +38,13 @@ export function LinePicker() {
           {busLines.map((line) => (
             <Button
               key={line.id}
-              onClick={() =>
+              onClick={() => {
+                log(player.PName, `selected line ${line.name} (${line.id})`);
                 setCurrentLineState((prevState) => ({
                   ...prevState,
                   line,
-                }))
-              }
+                }));
+              }}
             >
               {line.name}
             </Button>
