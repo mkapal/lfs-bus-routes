@@ -9,20 +9,15 @@ export function CurrentBusStop() {
   const currentBusRouteState = useAtomValue(currentBusRouteStateAtom);
   const progress = useAtomValue(busStopBoardingProgressAtom);
 
-  if (!currentBusRouteState || !currentBusRouteState.stop) {
+  if (!currentBusRouteState || !currentBusRouteState.stop || !progress) {
     return null;
   }
 
   return (
-    <FullWidthFlex top={10} direction="column" alignItems="center">
-      <Button variant="dark" width={50} height={10}>
-        {currentBusRouteState.stop.name}
+    <FullWidthFlex top={20} direction="column" alignItems="center">
+      <Button left={120} width={30} height={5} variant="dark">
+        Boarding: {progress}
       </Button>
-      {progress ? (
-        <Button top={5} left={120} width={30} height={5} variant="dark">
-          Boarding: {progress}
-        </Button>
-      ) : null}
     </FullWidthFlex>
   );
 }

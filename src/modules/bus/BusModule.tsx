@@ -3,8 +3,10 @@ import { type ReactNode } from "react";
 
 import { busStopBoardingProgressAtom } from "@/modules/bus/boarding/busStopBoardingProgressAtom";
 import { useBusStopBoardingProgress } from "@/modules/bus/boarding/useBusStopBoardingProgress";
+import { busStopProximityAtom } from "@/modules/bus/routes/busStopProximityAtom";
 import { currentBusRouteStateAtom } from "@/modules/bus/routes/currentBusRouteStateAtom";
-import { useCurrentBusStopDetector } from "@/modules/bus/stopDetection/useCurrentBusStopDetector";
+import { useBusStopProximity } from "@/modules/bus/routes/useBusStopProximity";
+import { useCurrentBusStopDetector } from "@/modules/bus/routes/useCurrentBusStopDetector";
 
 type BusStopModuleProps = {
   children: ReactNode;
@@ -13,7 +15,11 @@ type BusStopModuleProps = {
 export function BusModule({ children }: BusStopModuleProps) {
   return (
     <ScopeProvider
-      atoms={[currentBusRouteStateAtom, busStopBoardingProgressAtom]}
+      atoms={[
+        busStopProximityAtom,
+        currentBusRouteStateAtom,
+        busStopBoardingProgressAtom,
+      ]}
     >
       <BusHooks />
       {children}
@@ -22,6 +28,7 @@ export function BusModule({ children }: BusStopModuleProps) {
 }
 
 function BusHooks() {
+  useBusStopProximity();
   useCurrentBusStopDetector();
   useBusStopBoardingProgress();
 

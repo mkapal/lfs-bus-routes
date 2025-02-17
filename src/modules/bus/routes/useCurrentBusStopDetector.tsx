@@ -52,12 +52,14 @@ export function useCurrentBusStopDetector() {
         : null;
       const isGoodAngle =
         headingDelta === null ? false : headingDelta <= HEADING_THRESHOLD;
-      // const isCorrectLine = foundBusStop
-      //   ? !!currentLineState?.line?.stops.includes(foundBusStop)
-      //   : false;
+      const isCorrectBusRoute = foundBusStop
+        ? !!currentBusRouteState?.route?.stops.includes(foundBusStop)
+        : false;
 
       const currentBusStop =
-        isStopSpeed && isGoodAngle && foundBusStop ? foundBusStop : null;
+        isCorrectBusRoute && isStopSpeed && isGoodAngle && foundBusStop
+          ? foundBusStop
+          : null;
 
       setCurrentBusRouteState({
         ...currentBusRouteState,
