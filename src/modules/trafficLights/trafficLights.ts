@@ -5,42 +5,78 @@ import {
   OCOAction,
   OCOAutocrossStartLights,
 } from "node-insim/packets";
+import { assign, createActor, createMachine } from "xstate";
 
-import { IntersectionController } from "./IntersectionController";
+type TrafficLightColor = "OFF__" | "STOP_" | "GO___" | "STOP*" | "GO*__";
 
-export function initialize(inSim: InSim) {
-  const lights = [1, 2];
+export type TrafficLightController = {
+  createIntersection: (
+    ids: number[],
+    phases: { time: number; states: TrafficLightColor[] }[],
+  ) => void;
+};
 
-  const intersectionController = new IntersectionController({
-    sequence: [[1], [2]],
-    activeDurationMs: 10_000,
-    pendingDurationMs: 3_000,
-  });
+export function initialize(inSim: InSim): TrafficLightController {
+  function createIntersection(
+    ids: number[],
+    phases: { time: number; states: TrafficLightColor[] }[],
+  ) {
+    const entries = phases.map((phase, index) => [
+      `phase${index}`,
+      {
+        entry: assign({
+          lights: () => setTrafficLights(ids, phase.states),
+        }),
+        after: {
+          [phase.time * 1000]: `phase${(index + 1) % phases.length}`,
+        },
+      },
+    ]);
 
-  intersectionController.start();
+    const trafficLightMachine = createMachine({
+      initial: "phase0",
+      context: {
+        lights: setTrafficLights(
+          ids,
+          Array.from({ length: ids.length }, () => "STOP*"),
+        ),
+      },
+      states: Object.fromEntries(entries),
+    });
 
-  intersectionController.subscribe(
-    ({ isRunning, activeLights, pendingLights }) => {
-      lights.forEach((lightID) => {
-        const isActive = activeLights.includes(lightID);
-        const isPending = pendingLights.includes(lightID);
+    const service = createActor(trafficLightMachine);
 
-        const red = isRunning && !isActive;
-        const yellow = isRunning && isPending;
-        const green = isRunning && isActive && !isPending;
-
+    service.subscribe((state) => {
+      state.context.lights.forEach(({ id, color }) => {
         inSim.send(
           new IS_OCO({
             OCOAction: OCOAction.OCO_LIGHTS_SET,
             Index: ObjectIndex.AXO_START_LIGHTS,
-            Identifier: lightID,
+            Identifier: id,
             Data:
-              (red ? OCOAutocrossStartLights.RED : 0) |
-              (yellow ? OCOAutocrossStartLights.AMBER : 0) |
-              (green ? OCOAutocrossStartLights.GREEN : 0),
+              (color === "STOP_" || color === "GO*__"
+                ? OCOAutocrossStartLights.RED
+                : 0) |
+              (color === "STOP*" || color === "GO*__"
+                ? OCOAutocrossStartLights.AMBER
+                : 0) |
+              (color === "GO___" ? OCOAutocrossStartLights.GREEN : 0),
           }),
         );
       });
-    },
-  );
+    });
+
+    service.start();
+  }
+
+  return {
+    createIntersection,
+  };
+}
+
+function setTrafficLights(ids: number[], colorMap: TrafficLightColor[]) {
+  return ids.map((id, index) => ({
+    id,
+    color: colorMap[index] || "STOP_",
+  }));
 }

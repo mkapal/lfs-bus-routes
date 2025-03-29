@@ -4,10 +4,10 @@ import { InSimFlags, PacketType } from "node-insim/packets";
 import { StrictMode } from "react";
 import { createRoot } from "react-node-insim";
 
+import { createTrafficLightIntersections } from "@/modules/trafficLights/trafficLightIntersections";
 import { log } from "@/shared/log";
 
 import { App } from "./App";
-import * as trafficLights from "./modules/trafficLights/trafficLights";
 
 const { render, inSim } = createRoot({
   name: "Driving InSim",
@@ -30,7 +30,7 @@ inSim.on("disconnect", () => log("InSim disconnected"));
 inSim.on(PacketType.ISP_VER, (packet) => {
   log(`Connected to LFS ${packet.Product} ${packet.Version}`);
 
-  trafficLights.initialize(inSim);
+  createTrafficLightIntersections(inSim);
 
   // inSim.send(
   //   new IS_MTC({
