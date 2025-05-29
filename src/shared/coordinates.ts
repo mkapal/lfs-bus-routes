@@ -21,11 +21,3 @@ export function isWithinRadius({
 
   return distanceXY <= thresholds.xy && deltaZ <= thresholds.z;
 }
-
-export function getDistance(pointA: Coordinates3D, pointB: Coordinates3D) {
-  return Math.sqrt(
-    Math.pow(pointA.x - pointB.x, 2) +
-      Math.pow(pointA.y - pointB.y, 2) +
-      (pointB.z - pointB.z),
-  );
-}
