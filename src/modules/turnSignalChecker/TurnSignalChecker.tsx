@@ -9,6 +9,10 @@ export function TurnSignalChecker() {
   useOnPacket(PacketType.ISP_III, (packet, inSim) => {
     const args = packet.Msg.split(" ");
 
+    if (!args[1]) {
+      return;
+    }
+
     switch (args[0]) {
       case "DL_SIGNAL_L": {
         const playerId = parseInt(args[1], 10);
