@@ -1,6 +1,7 @@
 import "./env";
 
-import { InSimFlags, PacketType } from "node-insim/packets";
+import { InSim } from "node-insim";
+import { InSimFlags, IS_ISI_ReqI, PacketType } from "node-insim/packets";
 import { StrictMode } from "react";
 import { createRoot } from "react-node-insim";
 
@@ -9,14 +10,19 @@ import { log } from "@/shared/log";
 
 import { App } from "./App";
 
-const { render, inSim } = createRoot({
-  name: "Driving InSim",
-  host: process.env.HOST ?? "127.0.0.1",
-  port: process.env.PORT ? parseInt(process.env.PORT) : 29999,
-  adminPassword: process.env.ADMIN ?? "",
-  flags: InSimFlags.ISF_MCI,
-  interval: 500,
+const inSim = new InSim();
+
+inSim.connect({
+  IName: "Driving InSim",
+  ReqI: IS_ISI_ReqI.SEND_VERSION,
+  Host: process.env.HOST ?? "127.0.0.1",
+  Port: process.env.PORT ? parseInt(process.env.PORT) : 29999,
+  Admin: process.env.ADMIN ?? "",
+  Flags: InSimFlags.ISF_MCI,
+  Interval: 500,
 });
+
+const { render } = createRoot(inSim);
 
 render(
   <StrictMode>
